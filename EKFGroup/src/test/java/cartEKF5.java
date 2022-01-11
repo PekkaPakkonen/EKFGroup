@@ -35,11 +35,20 @@ public class cartEKF5 {
     public void click() throws Exception {
         String[] values = {"Vasya", "88005553535", "vasya@mail.ru", "Москва"};
         String comment = "Тестовый заказ, оформлять не нужно";
+
+        //push "Order from distributor
         webDriver.findElement(By.cssSelector(".btn-xl-lg.btn-primary")).click();
         new WebDriverWait(webDriver, 10)
                 .until(ExpectedConditions.urlToBe("https://ekfgroup.com/cart/checkout"));
         new WebDriverWait(webDriver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".mb-8.col-lg-6")));
+        webDriver.findElement(By.cssSelector(".btn-group-tabs .btn.btn-gray-200:not(.active)")).click();
+        webDriver.findElement(By.cssSelector(".mb-8.col-12 .form-autocomplete .form-control")).sendKeys("616");
+        new WebDriverWait(webDriver, 10)
+                .until(ExpectedConditions
+                        .presenceOfElementLocated(By
+                                .cssSelector(".dropdown.show .w-100 [role=\"presentation\"]:first-child")));
+        webDriver.findElement(By.cssSelector(".dropdown.show .w-100 [role=\"presentation\"]:first-child")).click();
         WebElement[] elements = webDriver.findElements(By.cssSelector(".mb-8.col-lg-6 .form-control"))
                 .toArray(new WebElement[0]);
 
@@ -51,13 +60,13 @@ public class cartEKF5 {
 
         elements[3].sendKeys(values[3]);
         new WebDriverWait(webDriver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.w-100 [role=\"presentation\"]")));
-        webDriver.findElement(By.cssSelector(".dropdown-menu.w-100 [role=\"presentation\"]")).click();
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.w-100.show [role=\"presentation\"]")));
+        webDriver.findElement(By.cssSelector(".dropdown-menu.w-100.show [role=\"presentation\"]")).click();
 
         webDriver.findElement(By.cssSelector(".form-control[rows=\"2\"]")).sendKeys(comment);
-        webDriver.findElement(By.cssSelector(".btn.btn-lg-lg")).click();
-        new WebDriverWait(webDriver, 10)
-                .until(ExpectedConditions.urlToBe("https://ekfgroup.com/cart/order-confirm"));
+//        webDriver.findElement(By.cssSelector(".btn.btn-lg-lg")).click();
+//        new WebDriverWait(webDriver, 10)
+//                .until(ExpectedConditions.urlToBe("https://ekfgroup.com/cart/order-confirm"));
 
     }
 
