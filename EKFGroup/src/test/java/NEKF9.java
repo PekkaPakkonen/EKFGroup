@@ -1,6 +1,5 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,7 +11,6 @@ import org.testng.annotations.Test;
 public class NEKF9 {
 
     //Change location doesn't work, wait for the functional to be implemented.
-    //.header-location-select .caption
 
     private WebDriver webDriver;
     private mainPage mainP;
