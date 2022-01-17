@@ -18,6 +18,7 @@ public class NEKF1 {
 
         webDriver = new FirefoxDriver();
         mainP = new mainPage(webDriver);
+        webDriver.navigate().back();
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/");
         new WebDriverWait(webDriver, 10)
