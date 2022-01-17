@@ -8,7 +8,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class NEKF11 {
+public class NEKF12 {
+
+    //.mb-12 .lh-120:first-child .text-reset
 
     private WebDriver webDriver;
     private mainPage mainP;
@@ -26,19 +28,18 @@ public class NEKF11 {
 
     @Test
     public void click() {
-        String[] links = {"instagram", "youtube", "facebook", "twitter", "vk.com"};
-        WebElement[] elements = webDriver
-                .findElements(By.cssSelector(".footer-social-links .btn-social .icon"))
-                .toArray(new WebElement[0]);
-        for(int i = 1; i < elements.length; i++) {
-            elements[i].click();
-            String[] windows = webDriver.getWindowHandles().toArray(new String[0]);
-            webDriver.switchTo().window(windows[1]);
-            new WebDriverWait(webDriver, 10)
-                    .until(ExpectedConditions.urlContains(links[i]));
-            webDriver.close();
-            webDriver.switchTo().window(windows[0]);
-        }
+        webDriver.findElement(By.cssSelector(".mb-12 .lh-120:first-child .text-reset")).click();
+        new WebDriverWait(webDriver, 10)
+                .until(ExpectedConditions.urlContains("user-agreement"));
+        webDriver.navigate().back();
+        new WebDriverWait(webDriver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By
+                        .cssSelector(".mb-12 .lh-120:first-child .text-reset")));
+        webDriver.findElement(By.cssSelector(".mb-12 .lh-120:nth-child(2) .text-reset")).click();
+        String[] windows = webDriver.getWindowHandles().toArray(new String[0]);
+        webDriver.switchTo().window(windows[1]);
+        new WebDriverWait(webDriver, 10)
+                .until(ExpectedConditions.urlContains("https://www.e-disclosure.ru"));
     }
 
     @AfterTest
