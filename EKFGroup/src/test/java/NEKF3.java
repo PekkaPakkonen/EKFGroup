@@ -32,21 +32,39 @@ public class NEKF3 {
                 .toArray(new WebElement[0]);
         for(int i = 0; i < droprightMenus.length; i++) {
             mainP.moveMouseToGroupHeader(droprightMenus[i]);
+            new WebDriverWait(webDriver, 3)
+                    .until(ExpectedConditions
+                            .presenceOfElementLocated(By
+                                    .cssSelector(".dropdown.dropright.show [role=\"presentation\"]")));
             WebElement[] showElements = webDriver
-                    .findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"] .dropdown.dropright .dropdown-menu.show .dropdown-item"))
+                    .findElements(By.cssSelector(".dropdown.dropright.show [role=\"presentation\"]"))
                     .toArray(new WebElement[0]);
             for(int j = 0; j < showElements.length; j++) {
-                String line = showElements[j].getText();
-                System.out.println(line);
                 showElements[j].click();
-                new WebDriverWait(webDriver, 5)
-                        .until(ExpectedConditions.visibilityOf(webDriver.findElement(By.cssSelector(".pb-lg-64 .h2"))));
-                System.out.println(webDriver.findElement(By.cssSelector(".pb-lg-64 .h2")).getText());
+                Thread.sleep(2000);
+                webDriver.navigate().back();
+                new WebDriverWait(webDriver, 10)
+                        .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
                 webDriver.findElement(mainP.getSupportBtn()).click();
                 droprightMenus = webDriver
                         .findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"] .dropdown.dropright"))
                         .toArray(new WebElement[0]);
                 mainP.moveMouseToGroupHeader(droprightMenus[i]);
+                new WebDriverWait(webDriver, 3)
+                        .until(ExpectedConditions
+                                .presenceOfElementLocated(By
+                                        .cssSelector(".dropdown.dropright.show [role=\"presentation\"]")));
+//                String line = showElements[j].getText();
+//                System.out.println(line);
+//                showElements[j].click();
+//                new WebDriverWait(webDriver, 5)
+//                        .until(ExpectedConditions.visibilityOf(webDriver.findElement(By.cssSelector(".pb-lg-64 .h2"))));
+//                System.out.println(webDriver.findElement(By.cssSelector(".pb-lg-64 .h2")).getText());
+//                webDriver.findElement(mainP.getSupportBtn()).click();
+//                droprightMenus = webDriver
+//                        .findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"] .dropdown.dropright"))
+//                        .toArray(new WebElement[0]);
+//                mainP.moveMouseToGroupHeader(droprightMenus[i]);
             }
             //showElements[i].click();
         }
