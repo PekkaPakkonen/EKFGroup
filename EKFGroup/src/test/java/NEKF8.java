@@ -26,27 +26,26 @@ public class NEKF8 {
 
     @Test
     public void click() {
-        String[] links = {"cirkulyaciya-v-konture",
-                "udalennoe-upravlenie-i-monitoring",
-                "osveshhenie",
-                "molniezashhita-zhily-i-obshhestvenny-zdanij",
-                "podderzhanie-davleniya",
-                "molniezashhita-promyshlenny-obektov",
-                "ventilyaciya",
-                "zapolnenie-i-osushenie-rezervuarov",
-                "avr"};
-        WebElement[] elements = webDriver
-                .findElements(By.cssSelector(".row .mb-24:nth-child(2) .footer-links-collapse li .footer-links-item"))
+        webDriver.findElement(By.cssSelector(".header-menu-main .nav-item:first-child")).click();
+
+        String[] links = {"feedback", "project", "report","question"};
+        webDriver.findElement(By.cssSelector(".header-dropdowns .dropdown:first-child .btn")).click();
+        new WebDriverWait(webDriver, 5)
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.show")));
+        WebElement[] elements = webDriver.findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"]"))
                 .toArray(new WebElement[0]);
-        for (int i = 0; i < elements.length; i++) {
+        for(int i = 0; i < elements.length; i++) {
             elements[i].click();
-            new WebDriverWait(webDriver, 10)
+            new WebDriverWait(webDriver, 5)
                     .until(ExpectedConditions.urlContains(links[i]));
-            webDriver.navigate().back();
+            webDriver.get("https://ekfgroup.com/");
             new WebDriverWait(webDriver, 10)
-                    .until(ExpectedConditions.urlToBe("https://ekfgroup.com/"));
-            new WebDriverWait(webDriver, 10)
-                    .until(ExpectedConditions.elementToBeClickable(elements[i]));
+                    .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
+            webDriver.findElement(By.cssSelector(".header-dropdowns .dropdown:first-child .btn")).click();
+            new WebDriverWait(webDriver, 5)
+                    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.show")));
+            elements = webDriver.findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"]"))
+                    .toArray(new WebElement[0]);
         }
     }
 
