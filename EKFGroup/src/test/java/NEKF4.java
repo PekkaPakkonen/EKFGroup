@@ -8,49 +8,48 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class NEKF8 {
+public class NEKF4 {
 
     private WebDriver webDriver;
     private mainPage mainP;
 
     @BeforeTest
     public void prep() {
-
         webDriver = new FirefoxDriver();
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/");
         new WebDriverWait(webDriver, 10)
-                .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
+                .until(ExpectedConditions.elementToBeClickable(mainP.getCalculatorsBtn()));
     }
 
     @Test
     public void click() {
-        webDriver.findElement(By.cssSelector(".header-menu-main .nav-item:first-child")).click();
 
-        String[] links = {"feedback", "project", "report","question"};
-        webDriver.findElement(By.cssSelector(".header-dropdowns .dropdown:first-child .btn")).click();
+        webDriver.findElement(mainP.getCalculatorsBtn()).click();
         new WebDriverWait(webDriver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.show")));
-        WebElement[] elements = webDriver.findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"]"))
+
+        WebElement[] menus = webDriver
+                .findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"]"))
                 .toArray(new WebElement[0]);
-        for(int i = 0; i < elements.length; i++) {
-            elements[i].click();
+
+        for(WebElement menu: menus) {
+            menu.click();
             new WebDriverWait(webDriver, 5)
-                    .until(ExpectedConditions.urlContains(links[i]));
-            webDriver.get("https://ekfgroup.com/");
+                    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".h2.d-flex")));
+            webDriver.navigate().back();
             new WebDriverWait(webDriver, 10)
-                    .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
-            webDriver.findElement(By.cssSelector(".header-dropdowns .dropdown:first-child .btn")).click();
-            new WebDriverWait(webDriver, 5)
+                    .until(ExpectedConditions.presenceOfElementLocated(mainP.getCalculatorsBtn()));
+            webDriver.findElement(mainP.getCalculatorsBtn()).click();
+            new WebDriverWait(webDriver, 10)
                     .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".dropdown-menu.show")));
-            elements = webDriver.findElements(By.cssSelector(".dropdown-menu.show [role=\"presentation\"]"))
-                    .toArray(new WebElement[0]);
         }
+
     }
 
     @AfterTest
-    public void stop() {
+    public void stopBrowser() {
         webDriver.quit();
     }
 }
