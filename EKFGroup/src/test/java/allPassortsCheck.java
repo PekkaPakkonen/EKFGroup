@@ -5,9 +5,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.io.*;
-import java.nio.charset.Charset;
+
 
 public class allPassortsCheck {
 
@@ -17,7 +16,7 @@ public class allPassortsCheck {
 
     @BeforeTest
     public void prep() throws IOException {
-        reader = new BufferedReader(new FileReader("links.txt", Charset.forName("utf-8")));
+        reader = new BufferedReader(new FileReader("links.csv"));
         webDriver = new FirefoxDriver();
         productP = new productPage(webDriver);
         webDriver.manage().window().maximize();
@@ -37,7 +36,7 @@ public class allPassortsCheck {
 
     @AfterTest
     public void stopBrowser() {
-        //webDriver.quit();
+        webDriver.quit();
     }
 
 }
