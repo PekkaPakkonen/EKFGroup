@@ -1,5 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class categoryPage {
 
@@ -20,4 +22,6 @@ public class categoryPage {
     public void landingPageClick() {
         driver.findElement(getLandingPageLink()).click();
     }
+
+
 }
