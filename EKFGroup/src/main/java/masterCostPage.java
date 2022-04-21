@@ -9,37 +9,56 @@ public class masterCostPage {
     private final WebDriver driver;
 
     private By downloadBtn = By.cssSelector(".ml-lg-auto .btn-outline-primary");
-    private By downloadExcelSheet = By.cssSelector(".row.mx-n4 .mb-xl-0:first-child .btn");
+    private By findAnalogueBtn = By.cssSelector(".flex-fill .btn-outline-primary.btn-block");
+    private By deleteArticleBtn = By.cssSelector(".cell-form-control .btn.rounded-pill");
+    private By downloadExcelSheetBtn = By.cssSelector(".row.mx-n4 .mb-xl-0:first-child .btn");
+    private By saveAnalogueSheetBtn = By.cssSelector(".mx-n4 .ml-lg-auto .btn");
 
     private By manualSearchTab = By.cssSelector(".mastercost-wrapper .nav-item:nth-child(1)");
     private By uploadExcelTab = By.cssSelector(".mastercost-wrapper .nav-item:nth-child(2)");
     private By searchByListTab = By.cssSelector(".mastercost-wrapper .nav-item:nth-child(3)");
 
-    private By searchTextField = By.cssSelector(".mb-8.col-xl-9 .form-control");
+    private By searchTextField = By.cssSelector(".mb-8.col-lg-4 .form-control"); //.form-control
+    private By priceTextField = By.cssSelector(".mb-8.col-lg-2 .form-control");
+
+    private By tableEkfArticle = By.cssSelector("[role=\"rowgroup\"]:not(.thead-light) [aria-colindex=\"4\"]");
+    private By tablePrice = By.cssSelector("[role=\"rowgroup\"]:not(.thead-light) [aria-colindex=\"2\"]");
+    private By tableEkfPrice = By.cssSelector("[role=\"rowgroup\"]:not(.thead-light) [aria-colindex=\"6\"]");
 
 
+    public masterCostPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+
+//GETTERS
     public By getDownloadBtn() {
         return downloadBtn;
     }
 
     public By getDownloadExcelSheet() {
-        return downloadExcelSheet;
+        return downloadExcelSheetBtn;
     }
 
     public By getSearchTextField() {
         return searchTextField;
     }
 
-    public masterCostPage(WebDriver driver) {
-        this.driver = driver;
+    public By getTableEkfArticle() {
+        return tableEkfArticle;
     }
 
+    public By getSaveAnalogueSheetBtn() {
+        return saveAnalogueSheetBtn;
+    }
+
+    //BUTTON AND TAB CLICKERS
     public void downloadBtnClick() {
         driver.findElement(downloadBtn).click();
     }
 
     public void downloadExcelSheetClick() {
-        driver.findElement(downloadExcelSheet).click();
+        driver.findElement(downloadExcelSheetBtn).click();
     }
 
     public void UploadExcelTabClick() {
@@ -54,9 +73,45 @@ public class masterCostPage {
         driver.findElement(searchByListTab).click();
     }
 
+    public void findAnalogueBtnClick() {
+        driver.findElement(findAnalogueBtn).click();
+    }
 
+    public void deleteArticleBtn() {
+        driver.findElement(deleteArticleBtn).click();
+    }
+
+    public void saveAnalogueSheetBtnClick() {
+        driver.findElement(saveAnalogueSheetBtn).click();
+    }
+
+//TEXT FIELD INPUT
+    public void searchTextFieldInput (String text) {
+        driver.findElement(searchTextField).sendKeys(text);
+    }
+
+    public void priceTextFieldInput (String text) {
+        driver.findElement(priceTextField).sendKeys(text);
+    }
+
+
+
+//WAITFOR elements
     public void waitForBTN(By element) {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
+//OTHER
+    public String getTableEkfArticleText() {
+        return driver.findElement(tableEkfArticle).getText();
+    }
+
+    public Boolean getPriceDiff() {
+        double price = Double.parseDouble(driver.findElement(tablePrice)
+                .getText().trim().split(" ")[0].replaceAll(",","."));
+        double priceEkf = Double.parseDouble(driver.findElement(tableEkfPrice)
+                .getText().trim().split(" ")[0].replaceAll(",","."));
+
+        return (price - priceEkf) >=0;
+    }
 }
