@@ -9,7 +9,7 @@ public class masterCostPage {
     private final WebDriver driver;
 
     private By downloadBtn = By.cssSelector(".ml-lg-auto .btn-outline-primary");
-    private By findAnalogueBtn = By.cssSelector(".flex-fill .btn-outline-primary.btn-block");
+    private By findAnalogueBtn = By.cssSelector(".tab-pane.active .btn-outline-primary.btn-block");
     private By deleteArticleBtn = By.cssSelector(".cell-form-control .btn.rounded-pill");
     private By downloadExcelSheetBtn = By.cssSelector(".row.mx-n4 .mb-xl-0:first-child .btn");
     private By saveAnalogueSheetBtn = By.cssSelector(".mx-n4 .ml-lg-auto .btn");
@@ -18,7 +18,8 @@ public class masterCostPage {
     private By uploadExcelTab = By.cssSelector(".mastercost-wrapper .nav-item:nth-child(2)");
     private By searchByListTab = By.cssSelector(".mastercost-wrapper .nav-item:nth-child(3)");
 
-    private By searchTextField = By.cssSelector(".mb-8.col-lg-4 .form-control"); //.form-control
+    private By searchTextField = By.cssSelector(".mb-8.col-lg-4 .form-control"); //manual search tab
+    private By searchListField = By.cssSelector(".mb-8.col-lg-8 .form-control"); //search by list tab
     private By priceTextField = By.cssSelector(".mb-8.col-lg-2 .form-control");
 
     private By tableEkfArticle = By.cssSelector("[role=\"rowgroup\"]:not(.thead-light) [aria-colindex=\"4\"]");
@@ -50,6 +51,10 @@ public class masterCostPage {
 
     public By getSaveAnalogueSheetBtn() {
         return saveAnalogueSheetBtn;
+    }
+
+    public By getSearchListField() {
+        return searchListField;
     }
 
     //BUTTON AND TAB CLICKERS
@@ -88,6 +93,10 @@ public class masterCostPage {
 //TEXT FIELD INPUT
     public void searchTextFieldInput (String text) {
         driver.findElement(searchTextField).sendKeys(text);
+    }
+
+    public void searchListFieldInput (String text) {
+        driver.findElement(searchListField).sendKeys(text);
     }
 
     public void priceTextFieldInput (String text) {
