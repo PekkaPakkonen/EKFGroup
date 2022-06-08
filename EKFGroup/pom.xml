@@ -68,9 +68,11 @@
 
     <distributionManagement>
         <repository>
-            <id>myMavenRepo.write</id>
-            <url>https://mymavenrepo.com/repo/NxWKnqqfAFrN9zr38Rsv/</url>
+            <id>local</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>file:///C:/Users/MrPang/Documents/Packages</url>
         </repository>
     </distributionManagement>
+
 
 </project>
