@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
@@ -18,7 +17,7 @@ public class cartEKF1 {
     private mainPage mainP;
 
     @Test
-    public void click() throws MalformedURLException {
+    public void click() throws Exception {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName("firefox");
         webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
