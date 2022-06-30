@@ -19,15 +19,16 @@ public class cartEKF1 {
     private mainPage mainP;
 
     @BeforeTest
-    public void prep() throws MalformedURLException {
+    public void prep() throws MalformedURLException, InterruptedException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName("firefox");
         webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/cart");
-        new WebDriverWait(webDriver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
+        Thread.sleep(10000);
+        //new WebDriverWait(webDriver, Duration.ofSeconds(10))
+         //       .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
     }
 
     @Test
