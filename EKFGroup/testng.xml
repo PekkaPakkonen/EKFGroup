@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
   
-<suite name="EKFSuite" verbose="1" >
+<suite name="EKFSuite" parallel="none">
   <test name="Package" >
     <classes>
         <class name="cartEKF1" />

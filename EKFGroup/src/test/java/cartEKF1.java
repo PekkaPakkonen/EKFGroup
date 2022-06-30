@@ -24,13 +24,13 @@ public class cartEKF1 {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName("firefox");
         caps.setPlatform(Platform.UNIX);
+        caps.acceptInsecureCerts();
         webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/cart");
-        Thread.sleep(10000);
-        //new WebDriverWait(webDriver, Duration.ofSeconds(10))
-         //       .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
+        new WebDriverWait(webDriver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
     }
 
     @Test
