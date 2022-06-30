@@ -1,7 +1,9 @@
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import java.net.URL;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import java.time.Duration;
+import java.net.MalformedURLException;
 
 public class prEKF1 {
 
@@ -17,13 +21,15 @@ public class prEKF1 {
     private JavascriptExecutor js;
 
     @BeforeTest
-    public void prep() {
-        webDriver = new FirefoxDriver();
+    public void prep() throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setBrowserName("firefox");
+        webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
         js = (JavascriptExecutor) webDriver;
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/");
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.elementToBeClickable(mainP.getItemsBtn()));
+        new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(mainP.getItemsBtn()));
         Actions action = new Actions(webDriver);
 
     }
@@ -32,13 +38,13 @@ public class prEKF1 {
     @Test
     public void clickTest() throws Exception {
         mainP.clickItemsBtn();
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(mainP.getBigItemHeader()));
         for(int i = 0; i < mainP.getAllItemsButtons().length; i++) {
             try {
                 mainP.moveMouseToGroupHeader(mainP.getAllItemsButtons()[i]);
             } catch (MoveTargetOutOfBoundsException e) {
-                js.executeScript("window.scrollBy(0,100)");
+                js.executeScript("window.scrollBy(0,Duration.ofSeconds(10)0)");
                 mainP.moveMouseToGroupHeader(mainP.getAllItemsButtons()[i]);
             }
             Thread.sleep(600);
@@ -46,7 +52,7 @@ public class prEKF1 {
         }
 
         js.executeScript("window.scrollTo(0,0)");
-        new WebDriverWait(webDriver,1)
+        new WebDriverWait(webDriver,Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(mainP.getCloseButton()));
         mainP.clickCloseButton();
         try {
@@ -56,7 +62,7 @@ public class prEKF1 {
         }
 
         mainP.clickItemsBtn();
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions
+        new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions
                 .elementToBeClickable(mainP.getBigItemHeader()));
         mainP.clickItemsBtn();
         try {

@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 public class calcEKF1 {
 
@@ -16,7 +17,7 @@ public class calcEKF1 {
     private masterCostPage masterCostP;
 
     @BeforeTest
-    public void prep() {
+    public void prep() throws MalformedURLException {
         FirefoxProfile profile = new FirefoxProfile();
         FirefoxOptions opts = new FirefoxOptions();
         profile.setPreference("browser.download.folderList",2);

@@ -1,12 +1,18 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import java.time.Duration;
+import java.net.MalformedURLException;
+
 
 public class NEKF1 {
 
@@ -15,14 +21,16 @@ public class NEKF1 {
 
 
     @BeforeTest
-    public void prep() {
+    public void prep() throws MalformedURLException {
 
-        webDriver = new FirefoxDriver();
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setBrowserName("firefox");
+        webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.navigate().back();
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/");
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
     }
 
@@ -36,18 +44,18 @@ public class NEKF1 {
 
         for(int i = 0; i < buttons.length; i++) {
             webDriver.findElement(buttons[i]).click();
-            new WebDriverWait(webDriver, 10)
+            new WebDriverWait(webDriver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.urlToBe(linkEKF + links[i]));
-            new WebDriverWait(webDriver, 10)
+            new WebDriverWait(webDriver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
         }
 
         mainP.clickCollapseBtn();
         for(int i = 0; i < collapsedButtons.length; i++) {
             webDriver.findElement(collapsedButtons[i]).click();
-            new WebDriverWait(webDriver, 10)
+            new WebDriverWait(webDriver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.urlToBe(linkEKF + links[i+3]));
-            new WebDriverWait(webDriver, 10)
+            new WebDriverWait(webDriver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
         }
 

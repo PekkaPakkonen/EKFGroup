@@ -3,6 +3,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.net.MalformedURLException;
+
 
 public class masterCostPage {
 
@@ -106,7 +109,7 @@ public class masterCostPage {
 
 //WAITFOR elements
     public void waitForBTN(By element) {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(element));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
 //OTHER

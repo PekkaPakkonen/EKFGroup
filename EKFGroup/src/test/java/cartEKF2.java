@@ -1,8 +1,6 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +12,7 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 public class cartEKF2 {
 
@@ -28,12 +27,12 @@ public class cartEKF2 {
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/cart");
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
         webDriver.findElement(By.cssSelector(".row .px-4 .form-control[placeholder=\"Артикул\"]"))
                 .sendKeys("mcb6-1-10C-av");
         webDriver.findElement(By.cssSelector(".row .px-4.col-md-auto")).click();
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".col-md-2.col-4 .img-fluid")));
     }
 
@@ -57,7 +56,7 @@ public class cartEKF2 {
         webDriver.findElement(By.cssSelector(".text-center.d-none .btn")).click();
 
         try {
-            new WebDriverWait(webDriver, 2)
+            new WebDriverWait(webDriver, Duration.ofSeconds(2))
                     .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".col-md-2.col-4 .img-fluid")));
         } catch (TimeoutException e) {
             System.out.println("Element disappeared");

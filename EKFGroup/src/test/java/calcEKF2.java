@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.MalformedURLException;
+import java.time.Duration;
 
 public class calcEKF2 {
 
@@ -20,7 +22,7 @@ public class calcEKF2 {
     private masterCostPage masterCostP;
 
     @BeforeTest
-    public void prep() {
+    public void prep() throws MalformedURLException {
         FirefoxProfile profile = new FirefoxProfile();
         FirefoxOptions opts = new FirefoxOptions();
         profile.setPreference("browser.download.folderList",2);
@@ -61,7 +63,7 @@ public class calcEKF2 {
         Assert.assertTrue(files.length > 0);
         masterCostP.deleteArticleBtn();
         try {
-            new WebDriverWait(webDriver, 2)
+            new WebDriverWait(webDriver, Duration.ofSeconds(2))
                     .until(ExpectedConditions.visibilityOf(webDriver.findElement(masterCostP.getTableEkfArticle())));
         } catch (NoSuchElementException e) {
             System.out.println("element is invisible");
@@ -76,7 +78,7 @@ public class calcEKF2 {
         Assert.assertEquals(masterCostP.getTableEkfArticleText(), "Аналог не найден");
         masterCostP.deleteArticleBtn();
         try {
-            new WebDriverWait(webDriver, 2)
+            new WebDriverWait(webDriver, Duration.ofSeconds(2))
                     .until(ExpectedConditions.visibilityOf(webDriver.findElement(masterCostP.getTableEkfArticle())));
         } catch (NoSuchElementException e) {
             System.out.println("element is invisible");
