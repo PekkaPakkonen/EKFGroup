@@ -3,7 +3,6 @@
 <suite name="EKFSuite" parallel="none">
   <test name="Package" >
     <classes>
-        <class name="cartEKF1" />
         <class name="cartEKF2" />
     </classes>
   </test>
