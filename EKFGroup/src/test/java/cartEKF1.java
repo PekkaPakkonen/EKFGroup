@@ -18,9 +18,9 @@ public class cartEKF1 {
     private mainPage mainP;
 
     @Test
-    public void click() throws MalformedURLException, InterruptedException {
+    public void click() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.acceptInsecureCerts();
+        caps.setBrowserName("firefox");
         webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
