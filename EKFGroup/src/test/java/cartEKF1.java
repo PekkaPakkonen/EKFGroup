@@ -23,7 +23,7 @@ public class cartEKF1 {
     public void prep() throws MalformedURLException, InterruptedException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName("firefox");
-        caps.setPlatform(Platform.LINUX);
+        caps.setPlatform(Platform.UNIX);
         webDriver = new RemoteWebDriver(new URL("http://localhost:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
