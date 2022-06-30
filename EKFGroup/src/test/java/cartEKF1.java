@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,8 +20,6 @@ public class cartEKF1 {
     @Test
     public void click() throws MalformedURLException, InterruptedException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setBrowserName("firefox");
-        caps.setPlatform(Platform.UNIX);
         caps.acceptInsecureCerts();
         webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
         mainP = new mainPage(webDriver);
