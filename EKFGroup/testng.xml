@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="EKFSuite" verbose="1" >
+  <test name="Package" >
+    <classes>
+        <class name="cartEKF1" />
+
+        <class name="cartEKF2" />
+    </classes>
+  </test>
+ 
+ 
+</suite>

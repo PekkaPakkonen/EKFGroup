@@ -9,7 +9,6 @@ public class masterCostPage {
     private final WebDriver driver;
 
     private By downloadBtn = By.cssSelector(".ml-lg-auto .btn-outline-primary");
-    private By findAnalogueBtn = By.cssSelector(".tab-pane.active .btn-outline-primary.btn-block");
     private By deleteArticleBtn = By.cssSelector(".cell-form-control .btn.rounded-pill");
     private By downloadExcelSheetBtn = By.cssSelector(".row.mx-n4 .mb-xl-0:first-child .btn");
     private By saveAnalogueSheetBtn = By.cssSelector(".mx-n4 .ml-lg-auto .btn");
@@ -79,7 +78,7 @@ public class masterCostPage {
     }
 
     public void findAnalogueBtnClick() {
-        driver.findElement(findAnalogueBtn).click();
+        //driver.findElement(findAnalogueBtn).click();
     }
 
     public void deleteArticleBtn() {
