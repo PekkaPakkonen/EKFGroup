@@ -27,13 +27,12 @@ public class cartEKF1 {
         webDriver.get("https://ekfgroup.com/cart");
         new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(mainP.getDistributor()));
-        String cb = "mcb6-1-10C-av";
         webDriver.findElement(By.cssSelector(".row .px-4 .form-control[placeholder=\"Артикул\"]"))
-                .sendKeys(cb);
+                .sendKeys("mcb6-1-10C-av");
         webDriver.findElement(By.cssSelector(".row .px-4.col-md-auto")).click();
         new WebDriverWait(webDriver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".col-md-2.col-4 .img-fluid")));
-        Assert.assertEquals(cb, webDriver.findElement(By.cssSelector(".col-md-2.col-4 .img-fluid")).getAttribute("alt"));
+        Assert.assertEquals("mcb6-1-10C-av", webDriver.findElement(By.cssSelector(".col-md-2.col-4 .img-fluid")).getAttribute("alt"));
         webDriver.quit();
     }
 
