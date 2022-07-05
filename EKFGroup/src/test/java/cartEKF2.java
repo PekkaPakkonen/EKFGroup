@@ -23,7 +23,7 @@ public class cartEKF2 {
     public void prep() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName("firefox");
-        webDriver = new RemoteWebDriver(new URL("http://172.17.0.3:4444"), caps);
+        webDriver = new RemoteWebDriver(new URL("http://localhost:4444"), caps);
         mainP = new mainPage(webDriver);
         webDriver.manage().window().maximize();
         webDriver.get("https://ekfgroup.com/cart");
