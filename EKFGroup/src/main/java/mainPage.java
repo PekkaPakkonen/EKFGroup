@@ -17,7 +17,7 @@ public class mainPage {
     private By retail = By.cssSelector(".collapse-right .nav .nav-item:nth-child(4)");
     private By houseOwner = By.cssSelector(".collapse-right .nav .nav-item:nth-child(5)");
 
-    private By itemsBtn = By.cssSelector(".btn.header-toggle-catalog");
+    private By itemsBtn = By.cssSelector(".btn.header-catalog-toggle");
     private By solutionsBtn = By.cssSelector(".nav.header-menu-main .nav-item:first-of-type");
     private By supportBtn = By.cssSelector(".nav.header-menu-main .nav-item:nth-of-type(2)");
     private By calculatorsBtn = By.cssSelector(".nav.header-menu-main .nav-item:nth-of-type(3) .dropdown");
@@ -25,10 +25,12 @@ public class mainPage {
     private By aboutUsBtn = By.cssSelector(".nav.header-menu-main .nav-item:nth-of-type(5)");
 
     //.menu-catalog
-    private By itemHeader = By.cssSelector(".menu-catalog-nav:first-of-type .nav-item");
+    private By itemHeader = By.cssSelector(".menu-catalog-nav:not(.mb-24) .nav-item");
     private By subItemHeader = By.cssSelector(".nav-item.nav-item-header .nav-link");
+    private By subCategoryHeader = By.cssSelector(".menu-catalog-panel:not(.menu-catalog-panel-root) .nav-item:not(.nav-item-header) .nav-link");
     private By bigItemHeader = By.cssSelector(".menu-catalog-panel .text-hover-primary");
     private By closeButton = By.cssSelector(".btn.btn-close .icon");
+    private By collapseBtn = By.cssSelector(".menu-catalog-nav .btn.collapse-toggle");
     private By catalogDownload = By.cssSelector(".menu-catalog .row.mx-n8 .px-8:first-child .btn-link");
     private By priceListDownload = By.cssSelector(".menu-catalog .row.mx-n8 .px-8:nth-child(2) .btn-link");
     private By etimLink = By.cssSelector(".menu-catalog .row.mx-n8 .px-8:nth-child(3) .btn-link");
@@ -44,10 +46,13 @@ public class mainPage {
 
 //GETTERS
 
+    public By getSubCategoryHeader() { return subCategoryHeader; }
 
     public By getSolutionsBtn() {
         return solutionsBtn;
     }
+
+    public By getCollapseBtn() { return collapseBtn; }
 
     public By getSupportBtn() {
         return supportBtn;
@@ -167,6 +172,8 @@ public class mainPage {
         driver.findElement(collapseButton).click();
     }
 
+    public void clickItemHeader() { driver.findElement(itemHeader).click(); }
+
 //OTHER STUFF
     public void moveMouseToGroupHeader(WebElement webElement) {
         Actions action = new Actions(driver);
@@ -176,4 +183,10 @@ public class mainPage {
     public WebElement[] getAllItemsButtons() {
         return driver.findElements(itemHeader).toArray(new WebElement[0]);
     }
+    public WebElement[] getAllSubItemButtons() {
+        return driver.findElements(subItemHeader).toArray(new WebElement[0]);
+    }
+    public WebElement[] getAllCollapseButton() { return driver.findElements(collapseBtn).toArray(new WebElement[0]); }
+    public WebElement[] getAllSubCategoryHeaders() { return driver.findElements(subCategoryHeader).toArray(new WebElement[0]); }
+    //subItemHeader
 }
