@@ -6,12 +6,11 @@
 
     <groupId>org.example</groupId>
     <artifactId>EKFGroup</artifactId>
-    <version>1.2</version>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <build>
@@ -28,7 +27,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>2.3.2</version>
                     <configuration>
-                        <encoding>UTF-8</encoding>
+                        <encoding>iso-8859-1</encoding>
                         <source>1.8</source>
                         <target>1.8</target>
                     </configuration>
@@ -36,10 +35,10 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.19.1</version>
+                    <version>3.0.0-M7</version>
                     <configuration>
                         <suiteXmlFiles>
-                            <suiteXmlFile>${project.basedir}</suiteXmlFile>
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
                         <!--reportsDirectory>${project.basedir}/Reports/TestReport_${timestamp}</reportsDirectory>-->
                     </configuration>
@@ -48,24 +47,23 @@
         </pluginManagement>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.2.1</version>
-        </dependency>
 
+
+    <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.14.3</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.12</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 
