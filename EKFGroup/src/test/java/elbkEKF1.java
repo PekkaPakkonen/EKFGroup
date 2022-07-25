@@ -34,6 +34,7 @@ public class elbkEKF1 {
     }
 
     @Test
+    //kek
     public void checkCatalogLinks() throws InterruptedException {
         ArrayList<String> categories = new ArrayList<>();
         ArrayList<String> subCategories = new ArrayList<>();
